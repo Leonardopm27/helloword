@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Grade Horária {% endblock %}
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h2>Disciplinas do Curso</h2>
+    {% if user.is_authenticated %}
+    <h3 style="color: #6aafd6"> Olá  {{ user.username }} </h3>
+    {% endif %}
+
+    <table class="blueTable">
+        <thead>
+            <tr>
+                <th>Título da Disciplina</th>
+                <th>Turno</th>
+                <th>Dia da Semana</th>
+                <th>Semestre</th>
+                <th>Status</th>
+                <th>Local</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for listamatricula in disciplinas %}
+            <tr>
+                <td>{{listamatricula.disciplina.titulo}}</td>
+                <td>{{listamatricula.disciplina.turno}}</td>
+                <td>{{listamatricula.disciplina.diadasemana}}</td>
+                <td>{{listamatricula.semestre}}</td>
+                <td>{{listamatricula.status}}</td>
+                <td>{{listamatricula.disciplina.local}}</td>
+                <td>
+                    <a href="{{listamatricula.disciplina.descricao}}"><span><i class="fas fa-chalkboard-teacher" title="Entrar na aula"></i></span></a>
+                    <a href="fazerMatricula/{{listamatricula.id}}"><i class="fas fa-user-graduate" title="Realizar Matricula"></i></a></td>
+            </tr>
+              {% endfor %}
+        </tbody>
+        </tr>
+    </table>
+
+
+</div>
+{% endblock %}
